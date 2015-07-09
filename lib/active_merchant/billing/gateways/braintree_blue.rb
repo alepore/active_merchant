@@ -500,6 +500,10 @@ module ActiveMerchant #:nodoc:
         parameters[:billing] = map_address(options[:billing_address]) if options[:billing_address] && !options[:payment_method_token]
         parameters[:shipping] = map_address(options[:shipping_address]) if options[:shipping_address]
         parameters[:channel] = application_id if application_id.present? && application_id != "ActiveMerchant"
+
+        parameters[:options][:three_d_secure] = { :required => true } if options[:three_d_secure]
+        parameters[:payment_method_nonce] = options[:payment_method_nonce] if options[:payment_method_nonce]
+
         parameters
       end
     end
